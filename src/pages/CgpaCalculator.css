@@ -1,0 +1,154 @@
+/* src/pages/CgpaCalculator.css */
+
+/* Root Colors */
+:root {
+    --primary-color: #3498db;
+    --secondary-color: #eef2ff;
+    --border-color: #dcdcdc;
+    --bg-color: #ffffff;
+    --text-color: #222;
+    --input-bg: #f8f8f8;
+    --input-text: #111;
+    --btn-primary-bg: #3498db;
+    --btn-warning-bg: #f1c40f;
+    --btn-success-bg: #2ecc71; 
+    --card-bg: #fdfdfd;
+}
+
+/* MAIN CONTAINER (Padding wapas add ki gayi) */
+.calculator-container {
+    width: 100%;
+    max-width: 100%;
+    margin: auto;
+    padding: 1rem; /* <-- Padding 1rem rakhi */
+    border-radius: 12px;
+    background: var(--bg-color);
+    box-sizing: border-box; 
+}
+
+.calculator-container h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+/* --- YAHAN BADLAAV KIYA GAYA HAI --- */
+/* Input Table Styles */
+.input-table {
+    width: 100%;
+    /* Horizontal 2px, Vertical 6px gap */
+    border-spacing: 2px 6px; 
+    border-collapse: separate; /* border-spacing ke liye zaroori */
+    margin-bottom: 1rem;
+}
+
+.input-table th {
+    text-align: left;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    opacity: 0.8;
+    padding-left: 2px;
+    font-weight: normal; /* Labels ko bold nahi rakhega */
+    /* Column widths ko control karein */
+    width: 33.33%; 
+}
+
+/* Course Name column ko thoda bada rakhein */
+.input-table th:first-child {
+    width: 40%;
+}
+/* Credit/Grade ko chhota karein */
+.input-table th:nth-child(2),
+.input-table th:nth-child(3) {
+    width: 30%;
+}
+
+.input-table td {
+    padding: 0; /* Cell padding 0 rakhein */
+}
+
+/* Inputs ko table cell ke andar style karein */
+.input-table input,
+.input-table select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--input-bg);
+    color: var(--input-text);
+    font-size: 1rem;
+    box-sizing: border-box; 
+}
+/* --- END OF BADLAAV --- */
+
+
+/* BUTTONS */
+.btn {
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    color: white;
+    cursor: pointer;
+    width: 100%;
+}
+
+.btn-primary { background: var(--btn-primary-bg); }
+.btn-warning { background: var(--btn-warning-bg); }
+.btn-success { background: var(--btn-success-bg); }
+.btn-danger { background: #e74c3c; }
+
+/* Reset + Calculate buttons in 1 row */
+.action-row {
+    margin-top: 1rem;
+    display: flex;
+    gap: 12px;
+}
+
+.action-row .btn {
+    flex: 1;
+}
+
+/* TABLE */
+.table-responsive {
+    margin-top: 1.5rem;
+    overflow-x: auto;
+}
+
+.courses-table {
+    width: 100%;
+    min-width: 100%;
+    border-collapse: collapse;
+}
+
+.courses-table th,
+.courses-table td {
+    border: 1px solid var(--border-color);
+    padding: 10px;
+    font-size: .9rem;
+}
+
+.courses-table th {
+    background: var(--secondary-color);
+    font-weight: bold;
+}
+
+/* RESULT BOX */
+.result-box {
+    margin-top: 1.5rem;
+    padding: 20px;
+    border-radius: 12px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.result-value {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+/* Responsive Fix */
+@media (max-width: 480px) {
+    /* Buttons ko row me hi rehne dein */
+}
