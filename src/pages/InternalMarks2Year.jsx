@@ -7,6 +7,7 @@ const FormInput = ({ id, label, max, value, onChange }) => (
     <label htmlFor={id}>{label} (Max: {max})</label>
     <input
       type="number"
+      step="any"
       id={id}
       value={value}
       onChange={onChange}
@@ -94,7 +95,7 @@ const InternalMarks2Year = () => {
   };
 
   return (
-    <div className="calculator-container">
+    <div className="calculator-container2">
       <h1>Internal Marks (CSE/IT 2nd Year)</h1>
       <nav className="tab-nav">
         <button

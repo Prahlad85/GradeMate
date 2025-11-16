@@ -104,7 +104,7 @@ const CgpaCalculator = () => {
   };
 
   return (
-    <div className="calculator-container">
+    <div className="calculator-container1">
       <h1>CGPA Calculator</h1>
 
       {/* --- JSX STRUCTURE KO TABLE MEIN BADLA GAYA HAI --- */}
