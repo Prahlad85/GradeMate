@@ -9,7 +9,7 @@ import usePageTracking from "./hooks/usePageTracking";
 import ScrollToTop from "./ScrollToTop";
 
 function App() {
-  // useDevToolsBlocker();
+  useDevToolsBlocker();
   usePageTracking();
 
   return (

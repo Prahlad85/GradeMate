@@ -47,6 +47,30 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input {
+    border: 2px solid #ccc;
+    padding: 8px;
+    border-radius: 6px;
+    transition: 0.3s ease;
+}
+
+input:focus {
+    border-color: #3498db;
+    box-shadow: 2px 2px 4px rgba(17, 160, 255, 0.5); /* optional glow */
+    outline: none;
+}
+
+
 main {
   padding: 1rem;
   width: 100%;

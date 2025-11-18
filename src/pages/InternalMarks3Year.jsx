@@ -1,15 +1,15 @@
 // src/pages/InternalMarks3Year.jsx
 import React, { useState } from 'react';
-import ExperimentInputs from '../components/ExperimentInputs'; // Reusable component
+import ExperimentInputs from '../components/ExperimentInputs';
 
-// Helper component for form input
+// Reusable Input Component
 const FormInput = ({ id, label, max, value, onChange }) => (
   <div className="form-group">
     <label htmlFor={id}>{label} (Max: {max})</label>
     <input
       type="number"
-      step="any"
       id={id}
+      step="any"
       value={value}
       onChange={onChange}
       min="0"
@@ -22,7 +22,7 @@ const FormInput = ({ id, label, max, value, onChange }) => (
 const InternalMarks3Year = () => {
   const [activeTab, setActiveTab] = useState('theory');
 
-  // Parse + limit values
+  // LIMIT VALUES
   const getScore = (value, max) => {
     let num = parseFloat(value) || 0;
     if (num < 0) num = 0;
@@ -30,7 +30,7 @@ const InternalMarks3Year = () => {
     return num;
   };
 
-  /* ----------------------- THEORY ------------------------ */
+  /* ----------------------- THEORY ----------------------- */
 
   const [theoryMarks, setTheoryMarks] = useState({
     mst1: '', mst2: '', assign: '', att: '', surprise: '', quiz: ''
@@ -57,7 +57,7 @@ const InternalMarks3Year = () => {
   /* ----------------------- HYBRID ------------------------ */
 
   const [hybridMarks, setHybridMarks] = useState({
-    pmst: '', mst1: '', mst2: '', assign: '', att: '', surprise: '', quiz: ''
+    pmst: '', mst1: '', mst2: '', assign: '', att: '', surprise: '', quiz: '', finalp: ''
   });
 
   const [hybridExpScores, setHybridExpScores] = useState(Array(10).fill(''));
@@ -68,18 +68,24 @@ const InternalMarks3Year = () => {
   };
 
   const handleCalcHybrid = () => {
-    const totalExp = hybridExpScores.reduce((s, v) => s + getScore(v, 30), 0);
-    const exp = (totalExp / 300) * 30;
+    // EXPERIMENTS — 22.5 marks
+    const totalExp = hybridExpScores.reduce((sum, v) => sum + getScore(v, 30), 0);
+    const exp = (totalExp / 300) * 22.5;
 
-    const pmst = (getScore(hybridMarks.pmst, 10) / 10) * 10;
+    const pmst = (getScore(hybridMarks.pmst, 10) / 10) * 7.5;
     const mst1 = (getScore(hybridMarks.mst1, 20) / 20) * 5;
     const mst2 = (getScore(hybridMarks.mst2, 20) / 20) * 5;
-    const assign = (getScore(hybridMarks.assign, 10) / 10) * 10;
-    const att = (getScore(hybridMarks.att, 2) / 2) * 2;
-    const surprise = (getScore(hybridMarks.surprise, 12) / 12) * 4;
-    const quiz = (getScore(hybridMarks.quiz, 4) / 4) * 4;
+    const assign = (getScore(hybridMarks.assign, 10) / 10) * 5;
+    const att = (getScore(hybridMarks.att, 2) / 2) * 1;
+    const surprise = (getScore(hybridMarks.surprise, 12) / 12) * 2;
+    const quiz = (getScore(hybridMarks.quiz, 4) / 4) * 2;
 
-    const total = exp + pmst + mst1 + mst2 + assign + att + surprise + quiz;
+    // NEW FIELD — FINAL PRACTICAL (40 → 20 weightage)
+    const finalp = (getScore(hybridMarks.finalp, 40) / 40) * 20;
+
+    const total =
+      exp + pmst + mst1 + mst2 + assign + att + surprise + quiz + finalp;
+
     setHybridResult(total.toFixed(2));
   };
 
@@ -107,28 +113,11 @@ const InternalMarks3Year = () => {
     <div className="calculator-container3">
       <h1>Internal Marks (CSE/IT 3rd Year)</h1>
 
-      {/* ---------------- TAB BUTTONS ---------------- */}
+      {/* TAB BUTTONS */}
       <nav className="tab-nav">
-        <button
-          className={`tab-btn ${activeTab === 'theory' ? 'active' : ''}`}
-          onClick={() => setActiveTab('theory')}
-        >
-          Theory
-        </button>
-
-        <button
-          className={`tab-btn ${activeTab === 'hybrid' ? 'active' : ''}`}
-          onClick={() => setActiveTab('hybrid')}
-        >
-          Hybrid
-        </button>
-
-        <button
-          className={`tab-btn ${activeTab === 'practical' ? 'active' : ''}`}
-          onClick={() => setActiveTab('practical')}
-        >
-          Practical
-        </button>
+        <button className={`tab-btn ${activeTab === 'theory' ? 'active' : ''}`} onClick={() => setActiveTab('theory')}>Theory</button>
+        <button className={`tab-btn ${activeTab === 'hybrid' ? 'active' : ''}`} onClick={() => setActiveTab('hybrid')}>Hybrid</button>
+        <button className={`tab-btn ${activeTab === 'practical' ? 'active' : ''}`} onClick={() => setActiveTab('practical')}>Practical</button>
       </nav>
 
       {/* ---------------- THEORY TAB ---------------- */}
@@ -154,7 +143,7 @@ const InternalMarks3Year = () => {
         )}
       </div>
 
-      {/* ---------------- HYBRID TAB ---------------- */}
+      {/* ---------------- HYBRID TAB (UPDATED) ---------------- */}
       <div className={`tab-pane ${activeTab === 'hybrid' ? 'active' : ''}`}>
         <div className="form-grid">
           <FormInput id="pmst" label="PMST" max="10" value={hybridMarks.pmst} onChange={handleHybridChange} />
@@ -164,9 +153,10 @@ const InternalMarks3Year = () => {
           <FormInput id="att" label="Attendance" max="2" value={hybridMarks.att} onChange={handleHybridChange} />
           <FormInput id="surprise" label="Surprise Test" max="12" value={hybridMarks.surprise} onChange={handleHybridChange} />
           <FormInput id="quiz" label="Quiz" max="4" value={hybridMarks.quiz} onChange={handleHybridChange} />
+          <FormInput id="finalp" label="Final Practical" max="40" value={hybridMarks.finalp} onChange={handleHybridChange} />
         </div>
 
-        <ExperimentInputs 
+        <ExperimentInputs
           prefix="h"
           scores={hybridExpScores}
           setScores={setHybridExpScores}
