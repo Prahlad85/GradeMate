@@ -1,6 +1,7 @@
 // src/pages/CgpaCalculator.jsx
 import React, { useState } from 'react';
-import "./CgpaCalculator.css"; // CSS file import karein
+import { motion, AnimatePresence } from 'framer-motion';
+import "./CgpaCalculator.css";
 
 // Grade points map
 const gradePointsMap = {
@@ -17,6 +18,7 @@ const CgpaCalculator = () => {
   });
   const [addedCourses, setAddedCourses] = useState([]);
   const [results, setResults] = useState(null);
+  const [errorMsg, setErrorMsg] = useState('');
 
   const handleCurrentCourseChange = (e) => {
     const { name, value } = e.target;
@@ -26,7 +28,7 @@ const CgpaCalculator = () => {
   const handleAddCourse = (e) => {
     e.preventDefault();
     if (!currentCourse.credits || !currentCourse.grade) {
-      alert('Please fill all fields before adding the course.');
+      setErrorMsg('Please fill all fields before adding the course.');
       return;
     }
     setAddedCourses([...addedCourses, { ...currentCourse, id: subjectCounter }]);
@@ -45,7 +47,7 @@ const CgpaCalculator = () => {
 
   const handleCalculateCgpa = () => {
     if (addedCourses.length === 0) {
-      alert('Please add at least one course before calculating CGPA!');
+      setErrorMsg('Please add at least one course before calculating CGPA!');
       return;
     }
     let totalCredits = 0;
@@ -164,7 +166,7 @@ const CgpaCalculator = () => {
 
       {/* Reset + Calculate in 1 Row */}
       <div className="action-row">
-        <button className="btn btn-warning" onClick={handleReset}>Reset</button>
+        <button className="btn btn-danger" onClick={handleReset}>Reset</button>
         <button className="btn btn-success" onClick={handleCalculateCgpa}>Calculate</button>
       </div>
 
@@ -209,6 +211,37 @@ const CgpaCalculator = () => {
           </div>
         </div>
       )}
+
+      {/* Glassmorphism Error Modal */}
+      <AnimatePresence>
+        {errorMsg && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4"
+          >
+            <motion.div 
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              className="bg-background border border-border shadow-2xl rounded-2xl p-6 md:p-8 max-w-sm w-full text-center"
+            >
+              <div className="w-12 h-12 rounded-full bg-red-100 dark:bg-red-900/30 text-red-600 mx-auto flex items-center justify-center mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+              </div>
+              <h3 className="text-xl font-bold text-foreground mb-2">Notice</h3>
+              <p className="text-muted-foreground mb-6">{errorMsg}</p>
+              <button 
+                onClick={() => setErrorMsg('')}
+                className="w-full py-3 px-4 bg-foreground text-background font-semibold rounded-xl hover:opacity-90 transition-opacity"
+              >
+                Okay, got it
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

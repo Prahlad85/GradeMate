@@ -1,0 +1,280 @@
+/* Black/White Theme for Calculators */
+:root {
+  --calc-bg: #ffffff;
+  --calc-text: #000000;
+  --calc-border: #d4d4d4;
+  --calc-input-bg: #f9f9f9;
+  --calc-input-text: #000000;
+  --calc-primary: #000000;
+  --calc-primary-hover: #333333;
+  --calc-secondary-text: #555555;
+  --calc-tab-inactive: #777777;
+  --calc-result-bg: #f5f5f5;
+  --calc-danger: #000000;
+  --calc-warning: #ffffff;
+  --calc-warning-text: #000000;
+  --calc-warning-border: #000000;
+}
+
+html.dark {
+  --calc-bg: #000000;
+  --calc-text: #ffffff;
+  --calc-border: #333333;
+  --calc-input-bg: #111111;
+  --calc-input-text: #ffffff;
+  --calc-primary: #ffffff;
+  --calc-primary-hover: #cccccc;
+  --calc-secondary-text: #aaaaaa;
+  --calc-tab-inactive: #888888;
+  --calc-result-bg: #111111;
+  --calc-danger: #ffffff;
+  --calc-warning: #000000;
+  --calc-warning-text: #ffffff;
+  --calc-warning-border: #ffffff;
+}
+
+.calculator-container1,
+.calculator-container2,
+.calculator-container3 {
+  background-color: transparent;
+  color: var(--calc-text);
+}
+
+.calculator-container1 h1,
+.calculator-container2 h1,
+.calculator-container3 h1 {
+  text-align: center;
+  color: var(--calc-text);
+}
+
+/* Tabs */
+.tab-nav {
+  display: flex;
+  border-bottom: 2px solid var(--calc-border);
+  margin-bottom: 1.5rem;
+  justify-content: space-between;
+}
+
+.tab-btn {
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--calc-tab-inactive);
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s ease;
+  width: 49%;
+}
+
+.tab-btn:hover {
+  color: var(--calc-bg);
+  background-color: var(--calc-primary);
+  border-radius: 5px;
+}
+
+.tab-btn.active {
+  border-bottom-color: var(--calc-primary);
+  background-color: var(--calc-primary);
+  color: var(--calc-bg);
+  border-radius: 5px;
+}
+
+.tab-pane {
+  display: none;
+}
+
+.tab-pane.active {
+  display: block;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Forms */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.form-group label {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--calc-secondary-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  width: 100%;
+}
+
+.form-group input,
+.form-group select,
+.input-table input,
+.input-table select {
+  padding: 0.75rem;
+  border: 1px solid var(--calc-border);
+  border-radius: 8px;
+  background-color: var(--calc-input-bg);
+  color: var(--calc-input-text);
+  font-size: 1rem;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.input-table input:focus,
+.input-table select:focus {
+  border-color: var(--calc-primary);
+  outline: none;
+}
+
+/* Buttons */
+.btn {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.btn-primary, .btn-success {
+  background-color: var(--calc-primary);
+  color: var(--calc-bg);
+}
+.btn-primary:hover, .btn-success:hover { 
+  background-color: var(--calc-primary-hover); 
+}
+
+.btn-danger {
+  background-color: #ff0000;
+  color: #ffffff;
+  border: none;
+}
+.btn-danger:hover { 
+  background-color: #cc0000; 
+  color: #ffffff;
+}
+
+.btn-warning {
+  background-color: var(--calc-warning);
+  color: var(--calc-warning-text);
+  border: 1px solid var(--calc-warning-border);
+}
+.btn-warning:hover { 
+  background-color: var(--calc-primary); 
+  color: var(--calc-bg);
+}
+
+.button-group, .action-row {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+/* Results */
+.result-box {
+  background-color: var(--calc-result-bg);
+  border: 1px solid var(--calc-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+  text-align: center;
+  animation: fadeIn 0.5s ease;
+}
+
+.result-box h3 {
+  margin-top: 0;
+  color: var(--calc-primary);
+}
+
+.result-value {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--calc-text);
+  margin: 0.5rem 0;
+}
+
+.result-value.highlight {
+  animation: pulse 1s ease-in-out;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* 10. 3rd Year Experiment Grid */
+.experiment-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--calc-border);
+}
+
+.experiment-grid h4 {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: var(--calc-primary);
+}
+
+/* 11. Responsive */
+@media (max-width: 768px) {
+  .calculator-container1, .calculator-container2, .calculator-container3 {
+    margin: 1rem;
+  }
+  .form-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .calculator-container1, .calculator-container2, .calculator-container3 {
+    margin: 0.4rem;
+    padding: 12px;
+  }
+  .form-grid { 
+    grid-template-columns: 1fr 1fr; 
+    gap: 0.5rem;
+  }
+  .experiment-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+  
+  .form-group label {
+    font-size: 0.75rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  .form-group input, 
+  .form-group select {
+    padding: 0.5rem;
+    font-size: 0.85rem;
+    border-radius: 6px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .tab-btn {
+    padding: 0.5rem;
+    font-size: 0.9rem;
+  }
+}

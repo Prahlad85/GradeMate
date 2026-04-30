@@ -15,6 +15,18 @@
     --card-bg: #fdfdfd;
 }
 
+/* Dark Mode Overrides */
+html.dark {
+    --primary-color: #3498db;
+    --secondary-color: #111111;
+    --border-color: #333333;
+    --bg-color: #000000;
+    --text-color: #ffffff;
+    --input-bg: #111111;
+    --input-text: #ffffff;
+    --card-bg: #000000;
+}
+
 /* MAIN CONTAINER (Padding wapas add ki gayi) */
 .calculator-container1 {
   background-color: var(--card-bg);
@@ -155,6 +167,16 @@
 .courses-table th {
     background: var(--secondary-color);
     font-weight: bold;
+    color: var(--text-color);
+}
+
+.courses-table th:last-child {
+    color: #ff4444; /* Action Header Red */
+}
+
+.courses-table td:last-child .btn-danger {
+    background-color: #ff0000; /* Pure Red Button */
+    color: #ffffff;
 }
 
 /* RESULT BOX */
