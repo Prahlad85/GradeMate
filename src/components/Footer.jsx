@@ -36,7 +36,7 @@ const Footer = () => {
           </div>
 
           <div className="flex items-center gap-1">
-            Developed by <span className="text-foreground font-medium">Prahlad Kumar</span>
+            Developed by <span className="text-foreground font-medium">Prahlad Kumar</span> And Ankul Kumar
           </div>
         </div>
       </div>
