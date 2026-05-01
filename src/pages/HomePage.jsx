@@ -93,7 +93,7 @@ const HomePage = () => {
           variants={containerVariants}
           initial="hidden"
           animate="show"
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
         >
           {features.map((feature, index) => {
             const Icon = feature.icon;
@@ -101,21 +101,22 @@ const HomePage = () => {
               <motion.div key={index} variants={itemVariants} className="h-full">
                 <Link 
                   to={feature.path} 
-                  className={`block h-full group bg-card border border-border rounded-[20px] p-8 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 relative overflow-hidden ${feature.hoverBorder}`}
+                  className={`block h-full group bg-card border border-border rounded-[18px] sm:rounded-[24px] p-4 sm:p-8 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 relative overflow-hidden ${feature.hoverBorder}`}
                 >
                   <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
                   <div className="relative z-10 flex flex-col h-full">
-                    <div className={`w-14 h-14 rounded-2xl flex items-center justify-center bg-muted mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                      <Icon className={`w-7 h-7 ${feature.iconColor}`} />
+                    <div className={`w-10 h-10 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl flex items-center justify-center bg-muted mb-3 sm:mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                      <Icon className={`w-5 h-5 sm:w-7 sm:h-7 ${feature.iconColor}`} />
                     </div>
-                    <h3 className="text-2xl font-bold mb-3 text-foreground group-hover:text-blue-500 transition-colors">
+                    <h3 className="text-sm sm:text-2xl font-bold mb-1 sm:mb-3 text-foreground group-hover:text-blue-500 transition-colors leading-tight">
                       {feature.title}
                     </h3>
-                    <p className="text-muted-foreground mb-8 flex-1">
+                    <p className="hidden sm:block text-xs sm:text-base text-muted-foreground mb-8 flex-1">
                       {feature.description}
                     </p>
-                    <div className="flex items-center text-sm font-semibold text-foreground group-hover:text-blue-500 transition-colors mt-auto">
-                      Calculate Now <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    <div className="flex items-center text-[10px] sm:text-sm font-semibold text-foreground group-hover:text-blue-500 transition-colors mt-auto">
+                      <span className="sm:inline">Calculate Now</span>
+                      <ArrowRight className="ml-1 sm:ml-2 w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
                     </div>
                   </div>
                 </Link>
