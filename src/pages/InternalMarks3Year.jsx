@@ -78,7 +78,7 @@ const InternalMarks3Year = () => {
     const assign = (getScore(hybridMarks.assign, 10) / 10) * 6;
     const att = (getScore(hybridMarks.att, 2) / 2) * 2;
     const surprise = (getScore(hybridMarks.surprise, 12) / 12) * 4;
-    const quiz = (getScore(hybridMarks.quiz, 4) / 4) * 4;
+    const quiz = (getScore(hybridMarks.quiz, 4 ) / 4 ) * 4;
 
     // NEW FIELD — FINAL PRACTICAL (40 → 20 weightage)
     const finalp = (getScore(hybridMarks.finalp, 40) / 40) * 20;

@@ -8,6 +8,7 @@ const Footer = () => {
   const links = [
     { name: "Home", path: "/" },
     { name: "CGPA", path: "/cgpa" },
+    { name: "Aptitude", path: "/aptitude" },
     { name: "Internal 2nd Year", path: "/internal-2y" },
     { name: "Internal 3rd Year", path: "/internal-3y" }
   ];
@@ -35,7 +36,7 @@ const Footer = () => {
           </div>
 
           <div className="flex items-center gap-1">
-            Developed by <span className="text-foreground font-medium">Prahlad Kumar</span> And Ankul Kumar
+            Developed by <span className="text-foreground font-medium">Prahlad Kumar</span>
           </div>
         </div>
       </div>
