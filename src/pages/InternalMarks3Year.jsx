@@ -70,15 +70,15 @@ const InternalMarks3Year = () => {
   const handleCalcHybrid = () => {
     // EXPERIMENTS — 22.5 marks
     const totalExp = hybridExpScores.reduce((sum, v) => sum + getScore(v, 30), 0);
-    const exp = (totalExp / 300) * 22.5;
+    const exp = (totalExp / 300) * 20;
 
-    const pmst = (getScore(hybridMarks.pmst, 10) / 10) * 7.5;
+    const pmst = (getScore(hybridMarks.pmst, 10) / 10) * 4;
     const mst1 = (getScore(hybridMarks.mst1, 20) / 20) * 5;
     const mst2 = (getScore(hybridMarks.mst2, 20) / 20) * 5;
-    const assign = (getScore(hybridMarks.assign, 10) / 10) * 5;
-    const att = (getScore(hybridMarks.att, 2) / 2) * 1;
-    const surprise = (getScore(hybridMarks.surprise, 12) / 12) * 2;
-    const quiz = (getScore(hybridMarks.quiz, 4) / 4) * 2;
+    const assign = (getScore(hybridMarks.assign, 10) / 10) * 6;
+    const att = (getScore(hybridMarks.att, 2) / 2) * 2;
+    const surprise = (getScore(hybridMarks.surprise, 12) / 12) * 4;
+    const quiz = (getScore(hybridMarks.quiz, 4) / 4) * 4;
 
     // NEW FIELD — FINAL PRACTICAL (40 → 20 weightage)
     const finalp = (getScore(hybridMarks.finalp, 40) / 40) * 20;

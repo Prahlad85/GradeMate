@@ -14,6 +14,17 @@ const features = [
     iconColor: "text-blue-500",
     hoverBorder: "hover:border-blue-500/50"
   },
+
+  {
+    title: "Aptitude Internal Marks",
+    description: "Calculate your aptitude internal marks from MST, Assignments, Surprise Tests, Quiz & Attendance — out of 40.",
+    icon: Brain,
+    path: "/aptitude",
+    gradient: "from-amber-500/20 to-yellow-400/20",
+    iconColor: "text-amber-500",
+    hoverBorder: "hover:border-amber-500/50"
+  },
+
   {
     title: "Internal Marks (2nd Year)",
     description: "Quickly compute your internal marks for 2nd year CSE/IT subjects.",
@@ -31,15 +42,6 @@ const features = [
     gradient: "from-emerald-500/20 to-teal-500/20",
     iconColor: "text-emerald-500",
     hoverBorder: "hover:border-emerald-500/50"
-  },
-  {
-    title: "Aptitude Internal Marks",
-    description: "Calculate your aptitude internal marks from MST, Assignments, Surprise Tests, Quiz & Attendance — out of 40.",
-    icon: Brain,
-    path: "/aptitude",
-    gradient: "from-amber-500/20 to-yellow-400/20",
-    iconColor: "text-amber-500",
-    hoverBorder: "hover:border-amber-500/50"
   }
 ];
 

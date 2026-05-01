@@ -8,7 +8,7 @@ const FormInput = ({ id, label, max, weightage, value, onChange }) => (
     <label htmlFor={id}>
       {label}
       <span className="apt-meta">
-        Max: {max} &nbsp;|&nbsp; Weightage: {weightage}
+        Max: {max}
       </span>
     </label>
     <input
@@ -40,8 +40,8 @@ const components = [
   { key: "mst1",      label: "MST 1",       max: 20, weightage: 10 },
   { key: "mst2",      label: "MST 2",       max: 20, weightage: 10 },
   { key: "assignment",label: "Assignment",   max: 12, weightage: 6  },
-  { key: "surprise",  label: "Surprise Test",max: 12, weightage: 6  },
-  { key: "quiz",      label: "Quiz",         max: 4,  weightage: 4  },
+  { key: "surprise",  label: "Surprise Test",max: 12, weightage: 4  },
+  { key: "quiz",      label: "Quiz",         max: 6,  weightage: 6  },
   { key: "attendance",label: "Attendance",   max: 4,  weightage: 4  },
 ];
 
@@ -117,15 +117,11 @@ const AptitudeCalculator = () => {
         {/* Weightage info bar */}
         <div className="apt-info-bar">
           <span>📊 Total Weightage: <strong>40 marks</strong></span>
-          <span>📝 6 Components</span>
         </div>
 
         <div className="button-group">
           <button type="submit" className="btn btn-primary">
             Calculate Marks
-          </button>
-          <button type="button" className="btn btn-warning" onClick={handleReset}>
-            Reset
           </button>
         </div>
       </form>
@@ -156,45 +152,6 @@ const AptitudeCalculator = () => {
           <p className="apt-percent">
             {((result.total / 40) * 100).toFixed(1)}% scored
           </p>
-
-          {/* Breakdown Table */}
-          <div className="apt-breakdown">
-            <h4>Score Breakdown</h4>
-            <div className="apt-table-wrap">
-              <table className="apt-table">
-                <thead>
-                  <tr>
-                    <th>Component</th>
-                    <th>Marks Obtained</th>
-                    <th>Weightage</th>
-                    <th>Scaled Score</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {result.breakdown.map((row) => (
-                    <ScoreRow
-                      key={row.key}
-                      label={row.label}
-                      obtained={row.obtained}
-                      max={row.max}
-                      weightage={row.weightage}
-                      scaled={row.scaled}
-                    />
-                  ))}
-                </tbody>
-                <tfoot>
-                  <tr className="apt-total-row">
-                    <td colSpan="3">
-                      <strong>Total</strong>
-                    </td>
-                    <td className="apt-scaled">
-                      <strong>{result.total.toFixed(2)} / 40</strong>
-                    </td>
-                  </tr>
-                </tfoot>
-              </table>
-            </div>
-          </div>
         </div>
       )}
     </div>
