@@ -1,7 +1,7 @@
 // src/pages/HomePage.jsx
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Calculator, BookOpen, GraduationCap, ArrowRight } from 'lucide-react';
+import { Calculator, BookOpen, GraduationCap, ArrowRight, Brain } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const features = [
@@ -31,6 +31,15 @@ const features = [
     gradient: "from-emerald-500/20 to-teal-500/20",
     iconColor: "text-emerald-500",
     hoverBorder: "hover:border-emerald-500/50"
+  },
+  {
+    title: "Aptitude Internal Marks",
+    description: "Calculate your aptitude internal marks from MST, Assignments, Surprise Tests, Quiz & Attendance — out of 40.",
+    icon: Brain,
+    path: "/aptitude",
+    gradient: "from-amber-500/20 to-yellow-400/20",
+    iconColor: "text-amber-500",
+    hoverBorder: "hover:border-amber-500/50"
   }
 ];
 

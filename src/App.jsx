@@ -4,6 +4,7 @@ import HomePage from './pages/HomePage';
 import CgpaCalculator from './pages/CgpaCalculator';
 import InternalMarks2Year from './pages/InternalMarks2Year';
 import InternalMarks3Year from './pages/InternalMarks3Year';
+import AptitudeCalculator from './pages/AptitudeCalculator';
 import useDevToolsBlocker from "./hooks/useDevToolsBlocker";
 import usePageTracking from "./hooks/usePageTracking";
 import ScrollToTop from "./ScrollToTop";
@@ -22,6 +23,7 @@ function App() {
           <Route path="cgpa" element={<CgpaCalculator />} />
           <Route path="internal-2y" element={<InternalMarks2Year />} />
           <Route path="internal-3y" element={<InternalMarks3Year />} />
+          <Route path="aptitude" element={<AptitudeCalculator />} />
         </Route>
       </Routes>
     </>
