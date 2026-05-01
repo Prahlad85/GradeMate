@@ -4,6 +4,7 @@ input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
 input[type="number"] {
   -moz-appearance: textfield;
 }
@@ -53,7 +54,8 @@ html.dark {
   padding: 2rem;
   max-width: 900px;
   margin: 2rem auto;
-  width: 95%; /* Better centering than calc */
+  width: 95%;
+  /* Better centering than calc */
   box-sizing: border-box;
 }
 
@@ -108,8 +110,15 @@ html.dark {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Forms */
@@ -129,11 +138,10 @@ html.dark {
   margin-bottom: 0.5rem;
   font-weight: 600;
   color: var(--calc-secondary-text);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
   display: block;
   width: 100%;
+  line-height: 1.4;
+  word-break: break-word;
 }
 
 .form-group input,
@@ -168,12 +176,15 @@ html.dark {
   text-align: center;
 }
 
-.btn-primary, .btn-success {
+.btn-primary,
+.btn-success {
   background-color: var(--calc-primary);
   color: var(--calc-bg);
 }
-.btn-primary:hover, .btn-success:hover { 
-  background-color: var(--calc-primary-hover); 
+
+.btn-primary:hover,
+.btn-success:hover {
+  background-color: var(--calc-primary-hover);
 }
 
 .btn-danger {
@@ -181,8 +192,9 @@ html.dark {
   color: #ffffff;
   border: none;
 }
-.btn-danger:hover { 
-  background-color: #cc0000; 
+
+.btn-danger:hover {
+  background-color: #cc0000;
   color: #ffffff;
 }
 
@@ -191,12 +203,14 @@ html.dark {
   color: var(--calc-warning-text);
   border: 1px solid var(--calc-warning-border);
 }
-.btn-warning:hover { 
-  background-color: var(--calc-primary); 
+
+.btn-warning:hover {
+  background-color: var(--calc-primary);
   color: var(--calc-bg);
 }
 
-.button-group, .action-row {
+.button-group,
+.action-row {
   display: flex;
   gap: 1rem;
   margin-top: 1.5rem;
@@ -231,9 +245,17 @@ html.dark {
 }
 
 @keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }
 
 /* 10. 3rd Year Experiment Grid */
@@ -254,35 +276,44 @@ html.dark {
 
 /* 11. Responsive */
 @media (max-width: 768px) {
-  .calculator-container1, .calculator-container2, .calculator-container3 {
+
+  .calculator-container1,
+  .calculator-container2,
+  .calculator-container3 {
     margin: 1rem;
   }
+
   .form-grid {
     grid-template-columns: 1fr 1fr;
   }
 }
 
 @media (max-width: 480px) {
-  .calculator-container1, .calculator-container2, .calculator-container3 {
+
+  .calculator-container1,
+  .calculator-container2,
+  .calculator-container3 {
     margin: 1rem auto;
     width: 95%;
     padding: 15px;
   }
-  .form-grid { 
-    grid-template-columns: 1fr 1fr; 
+
+  .form-grid {
+    grid-template-columns: 1fr 1fr;
     gap: 0.5rem;
   }
+
   .experiment-grid {
     grid-template-columns: 1fr 1fr;
     gap: 0.5rem;
   }
-  
+
   .form-group label {
     font-size: 0.75rem;
     margin-bottom: 0.25rem;
   }
-  
-  .form-group input, 
+
+  .form-group input,
   .form-group select {
     padding: 0.5rem;
     font-size: 0.85rem;

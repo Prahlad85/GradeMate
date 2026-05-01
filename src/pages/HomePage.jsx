@@ -24,6 +24,15 @@ const features = [
     iconColor: "text-amber-500",
     hoverBorder: "hover:border-amber-500/50"
   },
+  {
+    title: "Internal Marks (1st Year)",
+    description: "Calculate your internal marks for 1st year subjects with Theory, Hybrid and Practical schemes.",
+    icon: Calculator,
+    path: "/internal-1y",
+    gradient: "from-purple-500/20 to-pink-500/20",
+    iconColor: "text-purple-500",
+    hoverBorder: "hover:border-purple-500/50"
+  },
 
   {
     title: "Internal Marks (2nd Year)",

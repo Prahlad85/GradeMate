@@ -93,10 +93,6 @@ const AptitudeCalculator = () => {
     <div className="calculator-container2 apt-wrapper">
       <div className="apt-header">
         <h1>Aptitude Internal Marks</h1>
-        <p className="apt-subtitle">
-          Calculate your aptitude internal marks out of <strong>40</strong>.
-          Enter your scores below and hit calculate.
-        </p>
       </div>
 
       <form onSubmit={handleSubmit}>
