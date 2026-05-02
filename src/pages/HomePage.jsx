@@ -102,12 +102,38 @@ const HomePage = () => {
           variants={containerVariants}
           initial="hidden"
           animate="show"
-          className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
+          className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-6 gap-4 sm:gap-6"
         >
           {features.map((feature, index) => {
             const Icon = feature.icon;
+            const totalCards = features.length;
+            const isMobileOdd = totalCards % 2 !== 0;
+            const isDefault3n1 = totalCards % 3 === 1;
+            const isDefault3n2 = totalCards % 3 === 2;
+            
+            const isFirst = index === 0;
+            const isSecond = index === 1;
+
+            let gridClasses = "";
+            
+            // Mobile & Tablet (2 columns)
+            if (isMobileOdd && isFirst) {
+              gridClasses += " col-span-2";
+            } else {
+              gridClasses += " col-span-1";
+            }
+
+            // Desktop (6 columns base)
+            if (isDefault3n1 && isFirst) {
+              gridClasses += " lg:col-span-6";
+            } else if (isDefault3n2 && (isFirst || isSecond)) {
+              gridClasses += " lg:col-span-3";
+            } else {
+              gridClasses += " lg:col-span-2";
+            }
+
             return (
-              <motion.div key={index} variants={itemVariants} className="h-full">
+              <motion.div key={index} variants={itemVariants} className={`h-full ${gridClasses}`}>
                 <Link 
                   to={feature.path} 
                   className={`block h-full group bg-card border border-border rounded-[18px] sm:rounded-[24px] p-4 sm:p-8 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 relative overflow-hidden ${feature.hoverBorder}`}
