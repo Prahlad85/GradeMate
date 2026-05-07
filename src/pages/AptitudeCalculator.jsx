@@ -201,31 +201,7 @@ const AptitudeCalculator = () => {
           </p>
 
           {/* Breakdown Table */}
-          <div>
-            <table>
-              <thead>
-                <tr>
-                  <th>Component</th>
-                  <th>Marks</th>
-                  <th>Weightage</th>
-                  <th>Scaled Score</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {result.breakdown.map((row) => (
-                  <ScoreRow
-                    key={row.key}
-                    label={row.label}
-                    obtained={row.obtained}
-                    max={row.max}
-                    weightage={row.weightage}
-                    scaled={row.scaled}
-                  />
-                ))}
-              </tbody>
-            </table>
-          </div>
+         
         </div>
       )}
     </div>
