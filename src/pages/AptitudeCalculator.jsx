@@ -75,14 +75,14 @@ const AptitudeCalculator = () => {
     const internalTotal = internalComponents.reduce((sum, c) => {
       const obtained = parse(marks[c.key]);
       const scaled = (obtained / c.max) * c.weightage;
+
       return sum + scaled;
     }, 0);
 
     // External Total (60)
     const finalObtained = parse(marks.finalcbt);
 
-    const externalTotal =
-      (finalObtained / 160) * 60;
+    const externalTotal = (finalObtained / 160) * 60;
 
     // Grand Total (100)
     const total = internalTotal + externalTotal;
@@ -120,6 +120,37 @@ const AptitudeCalculator = () => {
       return { label: "B (Average)", color: "#ff9800" };
 
     return { label: "Needs Improvement", color: "#f44336" };
+  };
+
+  // Inline Styles
+  const styles = {
+    resultGrid: {
+      display: "grid",
+      gridTemplateColumns: "repeat(2, 1fr)",
+      gap: "12px",
+      marginTop: "20px",
+    },
+
+    summaryItem: {
+      background: "rgba(255,255,255,0.05)",
+      border: "1px solid rgba(255,255,255,0.08)",
+      padding: "16px",
+      borderRadius: "16px",
+      textAlign: "center",
+      backdropFilter: "blur(10px)",
+    },
+
+    totalScore: {
+      marginTop: "18px",
+      width: "100%",
+    },
+
+    label: {
+      display: "block",
+      fontSize: "14px",
+      marginBottom: "10px",
+      opacity: 0.8,
+    },
   };
 
   return (
@@ -170,29 +201,37 @@ const AptitudeCalculator = () => {
         <div className="result-box apt-result-box">
           <h3>Result Summary</h3>
 
-          {/* Internal */}
-          <div className="apt-summary-item">
-            <span>Internal Marks</span>
+          {/* Internal + External */}
+          <div style={styles.resultGrid}>
+            {/* Internal */}
+            <div style={styles.summaryItem}>
+              <span style={styles.label}>Internal Marks</span>
 
-            <div className="result-value">
-              {result.internalTotal.toFixed(2)}
-              <span className="apt-out-of"> / 40</span>
+              <div className="result-value">
+                {result.internalTotal.toFixed(2)}
+                <span className="apt-out-of"> / 40</span>
+              </div>
             </div>
-          </div>
 
-          {/* External */}
-          <div className="apt-summary-item">
-            <span>External Marks</span>
+            {/* External */}
+            <div style={styles.summaryItem}>
+              <span style={styles.label}>External Marks</span>
 
-            <div className="result-value">
-              {result.externalTotal.toFixed(2)}
-              <span className="apt-out-of"> / 60</span>
+              <div className="result-value">
+                {result.externalTotal.toFixed(2)}
+                <span className="apt-out-of"> / 60</span>
+              </div>
             </div>
           </div>
 
           {/* Total */}
-          <div className="apt-summary-item total-score">
-            <span>Total Marks</span>
+          <div
+            style={{
+              ...styles.summaryItem,
+              ...styles.totalScore,
+            }}
+          >
+            <span style={styles.label}>Total Marks</span>
 
             <div className={`result-value ${highlight ? "highlight" : ""}`}>
               {result.total.toFixed(2)}
@@ -210,7 +249,7 @@ const AptitudeCalculator = () => {
             {getGrade(result.total).label}
           </div>
 
-          {/* Progress Bar */}
+          {/* Progress */}
           <div className="apt-progress-wrap">
             <div
               className="apt-progress-bar"
