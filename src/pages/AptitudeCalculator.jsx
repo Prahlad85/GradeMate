@@ -8,9 +8,10 @@ const FormInput = ({ id, label, max, weightage, value, onChange }) => (
     <label htmlFor={id}>
       {label}
       <span className="apt-meta">
-        Max: {max}
+        Max: {max} | Weightage: {weightage}
       </span>
     </label>
+
     <input
       type="number"
       step="any"
@@ -37,41 +38,65 @@ const ScoreRow = ({ label, obtained, max, weightage, scaled }) => (
 );
 
 const components = [
-  { key: "mst1",      label: "MST 1",       max: 20, weightage: 10 },
-  { key: "mst2",      label: "MST 2",       max: 20, weightage: 10 },
-  { key: "assignment",label: "Assignment",   max: 12, weightage: 6  },
-  { key: "surprise",  label: "Surprise Test",max: 12, weightage: 4  },
-  { key: "quiz",      label: "Quiz",         max: 6,  weightage: 6  },
-  { key: "attendance",label: "Attendance",   max: 4,  weightage: 4  },
+  { key: "mst1", label: "MST 1", max: 20, weightage: 10 },
+  { key: "mst2", label: "MST 2", max: 20, weightage: 10 },
+  { key: "assignment", label: "Assignment", max: 12, weightage: 6 },
+  { key: "surprise", label: "Surprise Test", max: 12, weightage: 4 },
+  { key: "quiz", label: "Quiz", max: 6, weightage: 6 },
+  { key: "attendance", label: "Attendance", max: 4, weightage: 4 },
+
+  // NEW INPUT
+  { key: "finalcbt", label: "Final CBT", max: 160, weightage: 60 },
 ];
 
-const initialMarks = components.reduce((acc, c) => ({ ...acc, [c.key]: "" }), {});
+const initialMarks = components.reduce(
+  (acc, c) => ({ ...acc, [c.key]: "" }),
+  {}
+);
 
 const AptitudeCalculator = () => {
   const [marks, setMarks] = useState(initialMarks);
   const [result, setResult] = useState(null);
   const [highlight, setHighlight] = useState(false);
 
-  const parse = (val) => Math.min(Math.max(parseFloat(val) || 0, 0), Infinity);
+  const parse = (val) =>
+    Math.min(Math.max(parseFloat(val) || 0, 0), Infinity);
 
   const handleChange = (e) => {
     const { id, value, max } = e.target;
+
     let num = parseFloat(value);
+
     if (num > parseFloat(max)) num = parseFloat(max);
     if (num < 0) num = 0;
-    setMarks((prev) => ({ ...prev, [id]: isNaN(num) ? "" : num }));
+
+    setMarks((prev) => ({
+      ...prev,
+      [id]: isNaN(num) ? "" : num,
+    }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     const breakdown = components.map((c) => {
       const obtained = parse(marks[c.key]);
+
       const scaled = (obtained / c.max) * c.weightage;
-      return { ...c, obtained, scaled };
+
+      return {
+        ...c,
+        obtained,
+        scaled,
+      };
     });
+
     const total = breakdown.reduce((sum, r) => sum + r.scaled, 0);
+
     setResult({ breakdown, total });
+
     setHighlight(true);
+
     setTimeout(() => setHighlight(false), 1000);
   };
 
@@ -81,11 +106,21 @@ const AptitudeCalculator = () => {
   };
 
   const getGrade = (total) => {
-    if (total >= 36) return { label: "O (Outstanding)", color: "#00c853" };
-    if (total >= 32) return { label: "A+ (Excellent)", color: "#00bcd4" };
-    if (total >= 28) return { label: "A (Very Good)", color: "#2196f3" };
-    if (total >= 24) return { label: "B+ (Good)", color: "#9c27b0" };
-    if (total >= 20) return { label: "B (Average)", color: "#ff9800" };
+    if (total >= 90)
+      return { label: "O (Outstanding)", color: "#00c853" };
+
+    if (total >= 80)
+      return { label: "A+ (Excellent)", color: "#00bcd4" };
+
+    if (total >= 70)
+      return { label: "A (Very Good)", color: "#2196f3" };
+
+    if (total >= 60)
+      return { label: "B+ (Good)", color: "#9c27b0" };
+
+    if (total >= 50)
+      return { label: "B (Average)", color: "#ff9800" };
+
     return { label: "Needs Improvement", color: "#f44336" };
   };
 
@@ -112,12 +147,22 @@ const AptitudeCalculator = () => {
 
         {/* Weightage info bar */}
         <div className="apt-info-bar">
-          <span>📊 Total Weightage: <strong>40 marks</strong></span>
+          <span>
+            📊 Total Weightage: <strong>100 marks</strong>
+          </span>
         </div>
 
         <div className="button-group">
           <button type="submit" className="btn btn-primary">
             Calculate Marks
+          </button>
+
+          <button
+            type="button"
+            className="btn btn-secondary"
+            onClick={handleReset}
+          >
+            Reset
           </button>
         </div>
       </form>
@@ -125,15 +170,19 @@ const AptitudeCalculator = () => {
       {result !== null && (
         <div className="result-box apt-result-box">
           {/* Main Score */}
-          <h3>Your Aptitude Internal Marks</h3>
+          <h3>Your Total Marks</h3>
+
           <div className={`result-value ${highlight ? "highlight" : ""}`}>
-            {result.total.toFixed(2)} <span className="apt-out-of">/ 40</span>
+            {result.total.toFixed(2)}
+            <span className="apt-out-of"> / 100</span>
           </div>
 
           {/* Grade Badge */}
           <div
             className="apt-grade-badge"
-            style={{ backgroundColor: getGrade(result.total).color }}
+            style={{
+              backgroundColor: getGrade(result.total).color,
+            }}
           >
             {getGrade(result.total).label}
           </div>
@@ -142,12 +191,42 @@ const AptitudeCalculator = () => {
           <div className="apt-progress-wrap">
             <div
               className="apt-progress-bar"
-              style={{ width: `${(result.total / 40) * 100}%` }}
+              style={{
+                width: `${(result.total / 100) * 100}%`,
+              }}
             />
           </div>
+
           <p className="apt-percent">
-            {((result.total / 40) * 100).toFixed(1)}% scored
+            {((result.total / 100) * 100).toFixed(1)}% scored
           </p>
+
+          {/* Breakdown Table */}
+          <div className="apt-breakdown">
+            <table>
+              <thead>
+                <tr>
+                  <th>Component</th>
+                  <th>Marks</th>
+                  <th>Weightage</th>
+                  <th>Scaled Score</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {result.breakdown.map((row) => (
+                  <ScoreRow
+                    key={row.key}
+                    label={row.label}
+                    obtained={row.obtained}
+                    max={row.max}
+                    weightage={row.weightage}
+                    scaled={row.scaled}
+                  />
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       )}
     </div>
