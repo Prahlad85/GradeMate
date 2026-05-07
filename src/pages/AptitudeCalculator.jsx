@@ -3,12 +3,12 @@ import React, { useState } from "react";
 import "./calculators.css";
 
 // Reusable Input Component
-const FormInput = ({ id, label, max, weightage, value, onChange }) => (
+const FormInput = ({ id, label, max, value, onChange }) => (
   <div className="form-group">
     <label htmlFor={id}>
       {label}
       <span className="apt-meta">
-        Max: {max} | Weightage: {weightage}
+        Max: {max}
       </span>
     </label>
 
@@ -45,7 +45,7 @@ const components = [
   { key: "quiz", label: "Quiz", max: 6, weightage: 6 },
   { key: "attendance", label: "Attendance", max: 4, weightage: 4 },
 
-  // NEW INPUT
+  // Final CBT
   { key: "finalcbt", label: "Final CBT", max: 160, weightage: 60 },
 ];
 
@@ -138,7 +138,6 @@ const AptitudeCalculator = () => {
               id={c.key}
               label={c.label}
               max={c.max}
-              weightage={c.weightage}
               value={marks[c.key]}
               onChange={handleChange}
             />
@@ -202,7 +201,7 @@ const AptitudeCalculator = () => {
           </p>
 
           {/* Breakdown Table */}
-          <div className="apt-breakdown">
+          <div>
             <table>
               <thead>
                 <tr>
