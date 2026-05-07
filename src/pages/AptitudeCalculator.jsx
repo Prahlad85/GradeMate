@@ -25,18 +25,6 @@ const FormInput = ({ id, label, max, value, onChange }) => (
   </div>
 );
 
-// Score breakdown row
-const ScoreRow = ({ label, obtained, max, weightage, scaled }) => (
-  <tr>
-    <td>{label}</td>
-    <td>
-      {obtained} / {max}
-    </td>
-    <td>{weightage}</td>
-    <td className="apt-scaled">{scaled.toFixed(2)}</td>
-  </tr>
-);
-
 const components = [
   { key: "mst1", label: "MST 1", max: 20, weightage: 10 },
   { key: "mst2", label: "MST 2", max: 20, weightage: 10 },
@@ -45,7 +33,7 @@ const components = [
   { key: "quiz", label: "Quiz", max: 6, weightage: 6 },
   { key: "attendance", label: "Attendance", max: 4, weightage: 4 },
 
-  // Final CBT
+  // External
   { key: "finalcbt", label: "Final CBT", max: 160, weightage: 60 },
 ];
 
@@ -79,21 +67,31 @@ const AptitudeCalculator = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const breakdown = components.map((c) => {
+    // Internal Total (40)
+    const internalComponents = components.filter(
+      (c) => c.key !== "finalcbt"
+    );
+
+    const internalTotal = internalComponents.reduce((sum, c) => {
       const obtained = parse(marks[c.key]);
-
       const scaled = (obtained / c.max) * c.weightage;
+      return sum + scaled;
+    }, 0);
 
-      return {
-        ...c,
-        obtained,
-        scaled,
-      };
+    // External Total (60)
+    const finalObtained = parse(marks.finalcbt);
+
+    const externalTotal =
+      (finalObtained / 160) * 60;
+
+    // Grand Total (100)
+    const total = internalTotal + externalTotal;
+
+    setResult({
+      internalTotal,
+      externalTotal,
+      total,
     });
-
-    const total = breakdown.reduce((sum, r) => sum + r.scaled, 0);
-
-    setResult({ breakdown, total });
 
     setHighlight(true);
 
@@ -144,10 +142,12 @@ const AptitudeCalculator = () => {
           ))}
         </div>
 
-        {/* Weightage info bar */}
+        {/* Weightage info */}
         <div className="apt-info-bar">
           <span>
-            📊 Total Weightage: <strong>100 marks</strong>
+            📊 Internal: <strong>40</strong> | External:{" "}
+            <strong>60</strong> | Total:{" "}
+            <strong>100</strong>
           </span>
         </div>
 
@@ -168,15 +168,39 @@ const AptitudeCalculator = () => {
 
       {result !== null && (
         <div className="result-box apt-result-box">
-          {/* Main Score */}
-          <h3>Your Total Marks</h3>
+          <h3>Result Summary</h3>
 
-          <div className={`result-value ${highlight ? "highlight" : ""}`}>
-            {result.total.toFixed(2)}
-            <span className="apt-out-of"> / 100</span>
+          {/* Internal */}
+          <div className="apt-summary-item">
+            <span>Internal Marks</span>
+
+            <div className="result-value">
+              {result.internalTotal.toFixed(2)}
+              <span className="apt-out-of"> / 40</span>
+            </div>
           </div>
 
-          {/* Grade Badge */}
+          {/* External */}
+          <div className="apt-summary-item">
+            <span>External Marks</span>
+
+            <div className="result-value">
+              {result.externalTotal.toFixed(2)}
+              <span className="apt-out-of"> / 60</span>
+            </div>
+          </div>
+
+          {/* Total */}
+          <div className="apt-summary-item total-score">
+            <span>Total Marks</span>
+
+            <div className={`result-value ${highlight ? "highlight" : ""}`}>
+              {result.total.toFixed(2)}
+              <span className="apt-out-of"> / 100</span>
+            </div>
+          </div>
+
+          {/* Grade */}
           <div
             className="apt-grade-badge"
             style={{
@@ -191,17 +215,14 @@ const AptitudeCalculator = () => {
             <div
               className="apt-progress-bar"
               style={{
-                width: `${(result.total / 100) * 100}%`,
+                width: `${result.total}%`,
               }}
             />
           </div>
 
           <p className="apt-percent">
-            {((result.total / 100) * 100).toFixed(1)}% scored
+            {result.total.toFixed(1)}% scored
           </p>
-
-          {/* Breakdown Table */}
-         
         </div>
       )}
     </div>
