@@ -18,7 +18,7 @@ const LinkedInPopup = () => {
     sessionStorage.setItem("linkedin-popup", "true");
 
     window.open(
-      "https://www.linkedin.com/in/prahlad85",
+      "https://www.linkedin.com/in/er.prahlad",
       "_blank"
     );
 
