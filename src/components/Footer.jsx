@@ -45,7 +45,7 @@ const Footer = () => {
             <span>Developed by</span>
 
             <a
-              href="https://www.linkedin.com/in/prahlad85"
+              href="https://www.linkedin.com/in/er-prahlad"
               target="_blank"
               rel="noopener noreferrer"
               className="relative inline-flex items-center gap-1 px-1 py-0 rounded-md
